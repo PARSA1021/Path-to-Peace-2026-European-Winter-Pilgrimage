@@ -1,0 +1,626 @@
+/* 글로벌 스타일 - 다크모드 지원 및 부드러운 색상 조정 */
+:root {
+    /* 기본 색상 */
+    --bg-color: #f8f9fa; /* 밝고 부드러운 배경 */
+    --card-bg: #ffffff; /* 흰색 카드 배경 */
+    --card-bg-darker: #f0f3f5; /* 카드 내부 구분용 (은은한 회색) */
+    --text-color: #343a40; /* 짙은 회색 텍스트 */
+    --text-color-light: #6c757d; /* 연한 회색 텍스트 */
+    --accent-color: #1e88e5; /* 세련되고 부드러운 파랑 (Material Blue) */
+    --accent-light: #e3f2fd; /* 악센트 밝은 버전 */
+    --success-color: #43a047; /* 초록 */
+    --success-color-light: #e8f5e9; /* 밝은 초록 (메모 배경) */
+    --danger-color: #e53935; /* 빨강 */
+    --danger-color-light: #fbe6e8; /* 밝은 빨강 (메모 배경) */
+    --warning-color: #ffb300; /* 주황 */
+    --border-color: #e9ecef; /* 은은한 구분선 */
+    /* 🌟 소프트하고 현대적인 그림자 효과 */
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --card-bg-darker: #282828;
+    --text-color: #e0e0e0;
+    --text-color-light: #b0b0b0;
+    --accent-color: #64b5f6; /* 밝은 파랑 */
+    --accent-light: #153b59;
+    --success-color: #a5d6a7;
+    --danger-color: #ef9a9a;
+    --border-color: #333333;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    /* 다크 모드 메모 배경색 */
+    --success-color-light: #1a361a;
+    --danger-color-light: #451b1f;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* -------------------- 헤더 & 토글 -------------------- */
+header {
+    background-color: var(--card-bg);
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--accent-color); /* 제목에 악센트 컬러 적용 */
+}
+
+#app-subtitle {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg-darker);
+    border: none; /* 테두리 제거 */
+    padding: 10px; /* 패딩 증가 */
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3em;
+    line-height: 1;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--accent-light);
+    transform: rotate(15deg); /* 호버 시 미묘한 애니메이션 */
+}
+
+/* -------------------- 네비게이션 -------------------- */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* 🌟 미묘한 반투명 배경 효과 */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .sticky-nav {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+.sticky-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow-x: auto; /* 모바일에서 스크롤 가능하도록 */
+    white-space: nowrap;
+}
+
+.sticky-nav li {
+    flex-shrink: 0;
+    padding: 0 5px;
+}
+
+.sticky-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 400; /* 네비게이션 폰트 두께 조정 */
+    font-size: 0.9em;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background-color 0.2s, color 0.2s;
+    border-bottom: none; /* 기본 테두리 제거 */
+}
+
+.sticky-nav a:hover,
+.sticky-nav a.active { 
+    color: var(--text-color);
+    background-color: var(--accent-light);
+    font-weight: 700;
+}
+
+/* -------------------- 메인 컨텐츠 및 섹션 -------------------- */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+section.hidden {
+    display: none !important;
+}
+
+/* -------------------- 카드 스타일 -------------------- */
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px; /* 모서리 더 둥글게 */
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s;
+}
+
+/* -------------------- 섹션 타이틀 -------------------- */
+h2 {
+    color: var(--text-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    /* 🌟 악센트 컬러로 부드러운 언더라인 효과 */
+    border-bottom: 3px solid var(--accent-color);
+    border-radius: 0 0 2px 2px;
+}
+
+/* -------------------- 검색 UI -------------------- */
+#search-container {
+    padding-bottom: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.1em;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) inset; /* 은은한 내부 그림자 */
+}
+
+#search-input::placeholder {
+    color: var(--text-color-light);
+}
+
+#search-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-light); /* 포커스 링 */
+}
+
+/* 🌟 검색 결과 하이라이팅 스타일 */
+.highlight {
+    background-color: var(--warning-color);
+    color: #121212;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+[data-theme="dark"] .highlight {
+    background-color: #fdd835;
+    color: #121212;
+}
+
+/* -------------------- 데이터 리스트 / 그리드 (일반 항목) -------------------- */
+.data-list > div,
+.data-grid > div {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-list > div:last-child,
+.data-grid > div:last-child {
+    border-bottom: none;
+}
+
+.data-list strong,
+.data-grid strong {
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: var(--text-color);
+}
+
+.data-list span,
+.data-grid span {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+
+/* 핵심 일정 (2열 그리드) */
+.data-grid.two-col {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 15px;
+}
+
+.data-grid.two-col .label {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.data-grid.two-col .value {
+    color: var(--text-color);
+}
+
+.data-grid.two-col .note {
+    grid-column: 1 / -1;
+    font-weight: bold;
+    color: var(--danger-color);
+    padding-top: 10px;
+    padding-bottom: 0 !important;
+    border-bottom: none;
+}
+
+/* -------------------- 상세 일정 카드 -------------------- */
+.itinerary-day-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+    overflow: hidden;
+    border: 1px solid var(--border-color); /* 미묘한 테두리 추가 */
+}
+
+.itinerary-header {
+    /* 🌟 부드러운 그라데이션 적용 */
+    background: linear-gradient(135deg, var(--accent-color) 0%, #005bb5 100%);
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+[data-theme="dark"] .itinerary-header {
+     /* 다크 모드 그라데이션 조정 */
+    background: linear-gradient(135deg, var(--accent-color) 0%, #2962ff 100%);
+}
+
+.itinerary-content {
+    padding: 20px;
+}
+
+.itinerary-route {
+    font-style: italic;
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--accent-light);
+}
+
+.itinerary-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.itinerary-item .time {
+    font-weight: 700;
+    min-width: 65px;
+    color: var(--accent-color); /* 시간 정보 강조 */
+}
+
+.itinerary-item .detail {
+    flex-grow: 1;
+    color: var(--text-color-light);
+}
+
+/* -------------------- 일정 메모 스타일 -------------------- */
+.itinerary-memo {
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.itinerary-memo strong {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.memo-tip {
+    background-color: var(--success-color-light); 
+    border-left: 5px solid var(--success-color);
+    color: var(--success-color);
+}
+
+.memo-caution {
+    background-color: var(--danger-color-light); 
+    border-left: 5px solid var(--danger-color);
+    color: var(--danger-color);
+}
+
+[data-theme="dark"] .memo-tip {
+    background-color: var(--success-color-light);
+    color: var(--success-color);
+}
+
+[data-theme="dark"] .memo-caution {
+    background-color: var(--danger-color-light);
+    color: var(--danger-color);
+}
+
+
+/* -------------------- 체크리스트 아코디언 -------------------- */
+.checklist-item {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.checklist-header {
+    width: 100%;
+    background-color: var(--card-bg-darker);
+    border: none;
+    padding: 18px 20px;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+    border-radius: 10px;
+}
+
+.checklist-header:hover {
+    background-color: var(--accent-light);
+}
+
+.checklist-header[aria-expanded="true"] {
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+[data-theme="dark"] .checklist-header {
+    background-color: #333;
+}
+[data-theme="dark"] .checklist-header[aria-expanded="true"] {
+    background-color: var(--accent-color);
+}
+
+.toggle-icon {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.checklist-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: var(--card-bg);
+}
+
+.checklist-content.open {
+    max-height: 500px; 
+    transition: max-height 0.5s ease-in;
+    padding-bottom: 10px;
+}
+
+.checklist-content ul {
+    list-style: none;
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.checklist-content li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.checklist-content li:last-child {
+    border-bottom: none;
+}
+
+/* -------------------- 날씨 섹션 -------------------- */
+/* 모바일 기본은 1열로 조정 */
+.weather-section .data-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.weather-item {
+    background-color: var(--card-bg-darker);
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.weather-item:hover {
+    transform: translateY(-2px); /* 호버 시 살짝 떠오르는 효과 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather-item strong {
+    font-size: 1.2em;
+    color: var(--accent-color);
+    margin-bottom: 5px !important;
+}
+
+.weather-item .temp {
+    font-weight: 700;
+    color: var(--danger-color);
+    margin: 5px 0;
+}
+
+.weather-item .notes {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+
+/* -------------------- 비상 연락망 -------------------- */
+#contact-note {
+    background-color: var(--warning-color);
+    opacity: 0.9;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    color: #333; 
+    border-left: 5px solid var(--warning-color);
+    margin-top: 25px;
+    font-weight: 500;
+}
+
+[data-theme="dark"] #contact-note {
+    background-color: #4c370f;
+    color: var(--warning-color);
+    border-left: 5px solid var(--warning-color);
+}
+
+/* -------------------- 푸터 -------------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85em;
+    color: var(--text-color-light);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+}
+
+/* 로딩 스피너 */
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+}
+
+
+/* ========================================================= */
+/* 🌟 반응형 디자인 (Responsive Design) */
+/* ========================================================= */
+
+/* -------------------- 모바일 최적화 (768px 이하 기본) -------------------- */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 10px;
+    }
+    header h1 {
+        font-size: 1.4em;
+    }
+    #theme-toggle {
+        top: 15px;
+        right: 10px;
+        padding: 8px;
+        font-size: 1.1em;
+    }
+    main {
+        padding: 15px;
+    }
+    .sticky-nav a {
+        font-size: 0.8em;
+        padding: 5px 8px;
+    }
+}
+
+/* -------------------- 초소형 모바일 최적화 (480px 이하) -------------------- */
+@media (max-width: 480px) {
+    /* 검색 입력창 패딩 조정 */
+    #search-input {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+
+    /* 핵심 일정: 1열로 변경 (가독성 최우선) */
+    .data-grid.two-col {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .data-grid.two-col .label {
+        font-size: 0.9em;
+        padding-bottom: 5px;
+        color: var(--text-color); /* 모바일에서 레이블 강조 해제 */
+    }
+    .data-grid.two-col .value {
+        padding-top: 0;
+        padding-bottom: 8px;
+        color: var(--text-color-light);
+    }
+    /* 항목 간 구분선 명확히 */
+    .data-grid.two-col > div {
+        border-bottom: 1px solid var(--border-color) !important;
+        padding: 5px 0;
+    }
+    .data-grid.two-col > div:last-child {
+        border-bottom: none !important;
+    }
+}
+
+
+/* -------------------- 태블릿 (Tablet) 최적화 (768px 이상) -------------------- */
+@media (min-width: 768px) {
+    main {
+        padding: 30px; /* 태블릿/PC에서 여백 확대 */
+    }
+
+    /* 네비게이션: 가로폭 충분하므로 스크롤바 숨기기 */
+    .sticky-nav ul {
+        justify-content: center;
+        overflow-x: hidden;
+    }
+
+    /* 날씨: 태블릿에서 2열로 표시 */
+    .weather-section .data-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+
+/* -------------------- PC (Desktop) 최적화 (1024px 이상) -------------------- */
+@media (min-width: 1024px) {
+    #app {
+        max-width: 1080px; /* PC에서 더 넓게 사용 */
+    }
+
+    /* 날씨: PC에서 3열로 표시 */
+    .weather-section .data-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* 상세 일정 카드/체크리스트: 가독성을 위해 중앙 정렬 및 최대 폭 설정 */
+    .itinerary-day-card,
+    .checklist-item {
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

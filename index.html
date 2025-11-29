@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유럽 성지순례 준비 가이드</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght=400;700&display=swap" rel="stylesheet">
+    
+    <meta name="theme-color" content="#1e88e5">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>유럽 성지순례 준비 가이드</h1>
+            <p id="app-subtitle"></p>
+            <button id="theme-toggle" aria-label="테마 전환">🌙</button>
+        </header>
+        
+        <nav id="nav-menu" class="sticky-nav">
+            <ul>
+                <li><a href="#schedule">핵심 일정</a></li>
+                <li><a href="#itinerary">상세 일정</a></li>
+                <li><a href="#cost">비용</a></li>
+                <li><a href="#luggage">수하물</a></li>
+                <li><a href="#checklist">체크리스트</a></li>
+                <li><a href="#weather">날씨</a></li>
+                <li><a href="#contact">연락망</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="search-container">
+                <input type="search" id="search-input" placeholder="일정, 준비물, 도시 등을 검색하세요 (예: 파리, 패딩)" aria-label="일정 검색">
+            </div>
+            <section id="schedule" class="card schedule-section">
+                <h2>🛫 핵심 집결 및 출도착 일정</h2>
+                <div id="schedule-data" class="data-grid two-col"></div>
+            </section>
+            
+            <section id="itinerary" class="itinerary-section">
+                <h2>✈️ 상세 순례 일정 (10일)</h2>
+                <div id="itinerary-data"></div>
+            </section>
+            
+            <section id="cost" class="card cost-section">
+                <h2>💰 비용 안내</h2>
+                <div id="cost-data" class="data-list"></div>
+            </section>
+
+            <section id="luggage" class="card luggage-section">
+                <h2>🧳 수하물 규정 & 팁</h2>
+                <div id="luggage-data" class="data-list"></div>
+            </section>
+
+            <section id="checklist" class="checklist-section">
+                <h2>✅ 준비물 체크리스트</h2>
+                <div id="checklist-data"></div>
+            </section>
+
+            <section id="weather" class="card weather-section">
+                <h2>🌡️ 순례지 1월 날씨 대비</h2>
+                <div id="weather-data" class="data-grid"></div>
+            </section>
+
+            <section id="contact" class="card contact-section">
+                <h2>📞 비상 연락망</h2>
+                <div id="contact-data" class="data-list"></div>
+                <p id="contact-note"></p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 경기남부교구 성화·청년</p>
+        </footer>
+    </div>
+    
+    <div id="loading" class="loading-spinner">데이터를 로딩 중입니다...</div>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker 등록 성공:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker 등록 실패:', error);
+                    });
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
