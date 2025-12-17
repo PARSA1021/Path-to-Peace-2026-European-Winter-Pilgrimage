@@ -2,26 +2,80 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>유럽 성지순례 준비 가이드</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="경기남부교구 성화·청년 유럽 성지순례 준비 가이드 - 파리, 스위스, 이탈리아 10일 순례">
+    <meta name="keywords" content="유럽 성지순례, 파리, 스위스, 이탈리아, 순례 가이드">
+    <meta name="author" content="경기남부교구">
     
+    <!-- PWA & 모바일 최적화 -->
+    <meta name="theme-color" content="#4A73C4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="성지순례 가이드">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- iOS Safari -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <title>유럽 성지순례 준비 가이드 | 경기남부교구</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234A73C4'/><stop offset='100%' style='stop-color:%23E8A87C'/></linearGradient></defs><rect fill='url(%23grad)' width='180' height='180' rx='20'/><text x='50%' y='50%' font-size='100' text-anchor='middle' dominant-baseline='central' fill='white' font-family='Arial'>✈️</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234A73C4'/><stop offset='100%' style='stop-color:%23E8A87C'/></linearGradient></defs><rect fill='url(%23grad)' width='180' height='180' rx='20'/><text x='50%' y='50%' font-size='100' text-anchor='middle' dominant-baseline='central' fill='white' font-family='Arial'>✈️</text></svg>">
+    
+    <!-- 폰트 최적화 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 스타일시트 -->
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json"> 
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght=400;700&display=swap" rel="stylesheet">
-    
-    <meta name="theme-color" content="#1e88e5">
+    <style>
+        /* 초기 로딩 최적화 */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 모바일 터치 최적화 */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        /* 스크롤 부드럽게 */
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        <!-- ====================== HEADER ====================== -->
         <header>
-            <h1>유럽 성지순례 준비 가이드</h1>
+            <h1>✈️ 유럽 성지순례 준비</h1>
             <p id="app-subtitle"></p>
             <button id="theme-toggle" aria-label="테마 전환">🌙</button>
         </header>
-        
+
+        <!-- ====================== NAVIGATION ====================== -->
         <nav id="nav-menu" class="sticky-nav">
-            <ul>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-list">
                 <li><a href="#schedule">핵심 일정</a></li>
                 <li><a href="#itinerary">상세 일정</a></li>
                 <li><a href="#cost">비용</a></li>
@@ -32,67 +86,83 @@
             </ul>
         </nav>
 
+        <!-- ====================== MAIN CONTENT ====================== -->
         <main>
+            <!-- 검색 -->
             <div id="search-container">
-                <input type="search" id="search-input" placeholder="일정, 준비물, 도시 등을 검색하세요 (예: 파리, 패딩)" aria-label="일정 검색">
+                <input 
+                    type="search" 
+                    id="search-input" 
+                    placeholder="일정, 준비물, 도시를 검색하세요 (예: 파리, 패딩, 시간)" 
+                    aria-label="일정 검색">
             </div>
+
+            <!-- 핵심 일정 -->
             <section id="schedule" class="card schedule-section">
                 <h2>🛫 핵심 집결 및 출도착 일정</h2>
                 <div id="schedule-data" class="data-grid two-col"></div>
             </section>
-            
+
+            <!-- 상세 일정 -->
             <section id="itinerary" class="itinerary-section">
                 <h2>✈️ 상세 순례 일정 (10일)</h2>
                 <div id="itinerary-data"></div>
             </section>
-            
+
+            <!-- 비용 -->
             <section id="cost" class="card cost-section">
                 <h2>💰 비용 안내</h2>
                 <div id="cost-data" class="data-list"></div>
             </section>
 
+            <!-- 수하물 -->
             <section id="luggage" class="card luggage-section">
                 <h2>🧳 수하물 규정 & 팁</h2>
                 <div id="luggage-data" class="data-list"></div>
             </section>
 
-            <section id="checklist" class="checklist-section">
+            <!-- 체크리스트 -->
+            <section id="checklist" class="card checklist-section">
                 <h2>✅ 준비물 체크리스트</h2>
                 <div id="checklist-data"></div>
             </section>
 
+            <!-- 날씨 -->
             <section id="weather" class="card weather-section">
                 <h2>🌡️ 순례지 1월 날씨 대비</h2>
                 <div id="weather-data" class="data-grid"></div>
             </section>
 
+            <!-- 연락망 -->
             <section id="contact" class="card contact-section">
                 <h2>📞 비상 연락망</h2>
                 <div id="contact-data" class="data-list"></div>
                 <p id="contact-note"></p>
             </section>
         </main>
-        
+
+        <!-- ====================== FOOTER ====================== -->
         <footer>
-            <p>&copy; 2025 경기남부교구 성화·청년</p>
+            <p>&copy; 2025 경기남부교구 성화·청년 | 은혜 가득한 순례 되세요 🙏</p>
         </footer>
     </div>
-    
-    <div id="loading" class="loading-spinner">데이터를 로딩 중입니다...</div>
-    
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker 등록 성공:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('Service Worker 등록 실패:', error);
-                    });
-            });
-        }
-    </script>
+
+    <!-- ====================== BACK TO TOP BUTTON ====================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="맨 위로 이동" title="맨 위로">
+        <span>↑</span>
+    </button>
+
+    <!-- ====================== OFFLINE INDICATOR ====================== -->
+    <div id="offline-indicator" class="offline-indicator hidden">
+        <span>📡 오프라인 모드입니다</span>
+    </div>
+
+    <!-- ====================== LOADING SPINNER ====================== -->
+    <div id="loading" class="loading-spinner">
+        <span>데이터를 로딩 중입니다...</span>
+    </div>
+
+    <!-- ====================== SCRIPTS ====================== -->
     <script src="script.js"></script>
 </body>
 </html>

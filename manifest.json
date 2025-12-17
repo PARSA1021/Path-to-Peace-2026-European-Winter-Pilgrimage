@@ -1,52 +1,29 @@
 {
   "name": "유럽 성지순례 준비 가이드",
-  "short_name": "순례 가이드",
-  "description": "경기남부교구 성화·청년 유럽 성지순례 가이드 및 체크리스트",
-  "start_url": "/index.html",
+  "short_name": "성지순례 가이드",
+  "description": "경기남부교구 성화·청년 유럽 성지순례 준비 가이드 - 파리, 스위스, 이탈리아 10일 순례",
+  "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#f8f9fa",
-  "theme_color": "#1e88e5",
+  "background_color": "#FFFBFE",
+  "theme_color": "#4A73C4",
+  "orientation": "portrait-primary",
+  "scope": "/",
   "icons": [
     {
-      "src": "/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-192x192.png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234A73C4'/><stop offset='100%' style='stop-color:%23E8A87C'/></linearGradient></defs><rect fill='url(%23grad)' width='192' height='192' rx='24'/><text x='50%' y='50%' font-size='120' text-anchor='middle' dominant-baseline='central' fill='white' font-family='Arial'>✈️</text></svg>",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234A73C4'/><stop offset='100%' style='stop-color:%23E8A87C'/></linearGradient></defs><rect fill='url(%23grad)' width='512' height='512' rx='64'/><text x='50%' y='50%' font-size='320' text-anchor='middle' dominant-baseline='central' fill='white' font-family='Arial'>✈️</text></svg>",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["travel", "lifestyle"],
+  "lang": "ko",
+  "dir": "ltr"
 }
+
